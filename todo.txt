@@ -1,0 +1,12 @@
+Procurar o refactoring do switch pro padrão state do Martin Fowler
+Refatorar o switch no método ExecuteSingleInstruction - OK
+	referências:
+		https://stackoverflow.com/questions/4233536/c-sharp-store-functions-in-a-dictionary
+		https://stackoverflow.com/questions/917551/func-delegate-with-no-return-type
+Refatorar os switches nos métodos RotateLeft e RotateRight - OK
+Remover o repositório de orientation da classe Rover - OK
+Refatorar o switch no método Move
+Implementar a restrição do terreno
+Ler as instruções gerais de um arquivo de texto
+Estruturar o projeto em camadas e colocar os arquivos correspondentes em cada uma delas.
+Colocar o projeto no meu GitHub
