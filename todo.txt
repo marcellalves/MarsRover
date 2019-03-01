@@ -5,8 +5,8 @@ Refatorar o switch no método ExecuteSingleInstruction - OK
 Refatorar os switches nos métodos RotateLeft e RotateRight - OK
 Remover o repositório de orientation da classe Rover - OK
 Colocar o projeto no meu GitHub - OK
-Procurar o refactoring do switch pro padrão state do Martin Fowler
-Refatorar o switch no método Move
+Refatorar o switch no método Move - OK
 Implementar a restrição do terreno
-Ler as instruções gerais de um arquivo de texto
+Procurar o refactoring do switch pro padrão state do Martin Fowler
 Estruturar o projeto em camadas e colocar os arquivos correspondentes em cada uma delas.
+Ler as instruções gerais de um arquivo de texto

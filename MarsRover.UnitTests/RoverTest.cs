@@ -45,28 +45,35 @@ namespace MarsRover.UnitTests
         }
 
         [Fact]
-        public void RoverExecutesMultipleInstructions_InstructionsString_PrintsExpectedCurrentLocation()
+        public void RoverExecutesMultipleInstructions_FirstInstructionsString_PrintsExpectedCurrentLocation()
         {
             var rover = new Rover(1, 2, 'N');
 
-            //rover.ExecuteInstructions("LMLMLMLMM");
-            rover.ExecuteInstructions("LM");
+            rover.ExecuteInstructions("LMLMLMLMM");
 
-            Assert.Equal("2 2 W", rover.PrintCurrentPosition());
+            Assert.Equal("1 3 N", rover.PrintCurrentPosition());
+        }
+
+        [Fact]
+        public void RoverExecutesMultipleInstructions_SecondInstructionsString_PrintsExpectedCurrentLocation()
+        {
+            var rover = new Rover(3, 3, 'E');
+
+            rover.ExecuteInstructions("MMRMMRMRRM");
+
+            Assert.Equal("5 1 E", rover.PrintCurrentPosition());
         }
     }
 
     public class Rover
     {
-        private int _xCoordinate;
-        private int _yCoordinate;
+        private Position _position;
         private IOrientation _orientation;
         private readonly IDictionary<char, Action> _executableInstructions;
 
         public Rover(int x, int y, char orientation)
         {
-            _xCoordinate = x;
-            _yCoordinate = y;
+            _position = new Position(x, y);
             _executableInstructions = new Dictionary<char, Action>
             {
                 ['L'] = RotateLeft,
@@ -87,7 +94,7 @@ namespace MarsRover.UnitTests
 
         public string PrintCurrentPosition()
         {
-            return $"{_xCoordinate} {_yCoordinate} {_orientation}";
+            return $"{_position.X} {_position.Y} {_orientation}";
         }
 
         private void ExecuteSingleInstruction(char instruction)
@@ -107,21 +114,7 @@ namespace MarsRover.UnitTests
 
         private void Move()
         {
-            switch (_orientation.ToString())
-            {
-                case "N":
-                    _yCoordinate++;
-                    break;
-                case "S":
-                    _yCoordinate--;
-                    break;
-                case "L":
-                    _xCoordinate--;
-                    break;
-                case "W":
-                    _xCoordinate++;
-                    break;
-            }
+            _position = _orientation.Move(_position);
         }
     }
 

@@ -83,12 +83,57 @@ namespace MarsRover.UnitTests
 
             Assert.Equal("N", result.ToString());
         }
+
+        [Fact]
+        public void North_Move_ReturnsNewPositionWithYAxisIncreased()
+        {
+            var north = new North();
+
+            var result = north.Move(new Position(1, 1));
+
+            Assert.Equal(1, result.X);
+            Assert.Equal(2, result.Y);
+        }
+
+        [Fact]
+        public void East_Move_ReturnsNewPositionWithXAxisIncreased()
+        {
+            var east = new East();
+
+            var result = east.Move(new Position(1, 1));
+
+            Assert.Equal(2, result.X);
+            Assert.Equal(1, result.Y);
+        }
+
+        [Fact]
+        public void South_Move_ReturnsNewPositionWithYAxisDecreased()
+        {
+            var south = new South();
+
+            var result = south.Move(new Position(1, 1));
+
+            Assert.Equal(1, result.X);
+            Assert.Equal(0, result.Y);
+        }
+
+        [Fact]
+        public void West_Move_ReturnsNewPositionWithXAxisDecreased()
+        {
+            var west = new West();
+
+            var result = west.Move(new Position(1, 1));
+
+            Assert.Equal(0, result.X);
+            Assert.Equal(1, result.Y);
+        }
     }
 
     public interface IOrientation
     {
         IOrientation ToLeft();
         IOrientation ToRight();
+        Position Move(Position currentPosition);
     }
 
     public class North : IOrientation
@@ -101,6 +146,11 @@ namespace MarsRover.UnitTests
         public IOrientation ToRight()
         {
             return new East();
+        }
+
+        public Position Move(Position currentPosition)
+        {
+            return new Position(currentPosition.X, currentPosition.Y + 1);
         }
 
         public override string ToString()
@@ -118,6 +168,11 @@ namespace MarsRover.UnitTests
         public IOrientation ToRight()
         {
             return new South();
+        }
+
+        public Position Move(Position currentPosition)
+        {
+            return new Position(currentPosition.X + 1, currentPosition.Y);
         }
 
         public override string ToString()
@@ -138,6 +193,11 @@ namespace MarsRover.UnitTests
             return new West();
         }
 
+        public Position Move(Position currentPosition)
+        {
+            return new Position(currentPosition.X, currentPosition.Y - 1);
+        }
+
         public override string ToString()
         {
             return "S";
@@ -156,9 +216,26 @@ namespace MarsRover.UnitTests
             return new North();
         }
 
+        public Position Move(Position currentPosition)
+        {
+            return new Position(currentPosition.X - 1, currentPosition.Y);
+        }
+
         public override string ToString()
         {
             return "W";
         }
+    }
+
+    public class Position
+    {
+        public Position(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public int X { get; }
+        public int Y { get; }
     }
 }
